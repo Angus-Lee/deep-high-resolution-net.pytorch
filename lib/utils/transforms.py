@@ -19,9 +19,9 @@ def flip_back(output_flipped, matched_parts):
     assert output_flipped.ndim == 4,\
         'output_flipped should be [batch_size, num_joints, height, width]'
 
-    output_flipped = output_flipped[:, :, :, ::-1]
+    output_flipped = output_flipped[:, :, :, ::-1]#沿着width左右翻转
 
-    for pair in matched_parts:
+    for pair in matched_parts:#大概率是用于tracking的吧 左右翻转之后关键点坐标也要翻一下？？ 
         tmp = output_flipped[:, pair[0], :, :].copy()
         output_flipped[:, pair[0], :, :] = output_flipped[:, pair[1], :, :]
         output_flipped[:, pair[1], :, :] = tmp
@@ -82,7 +82,7 @@ def get_affine_transform(
     dst[2:, :] = get_3rd_point(dst[0, :], dst[1, :])
 
     if inv:
-        trans = cv2.getAffineTransform(np.float32(dst), np.float32(src))
+        trans = cv2.getAffineTransform(np.float32(dst), np.float32(src))#仿射变换 保持二维图形的平直性
     else:
         trans = cv2.getAffineTransform(np.float32(src), np.float32(dst))
 
