@@ -11,7 +11,7 @@ from __future__ import print_function
 
 import os
 
-from yacs.config import CfgNode as CN
+from yacs.config import CfgNode as CN#yacs是用于定义和管理系统信息（主要是超参数）的轻量级库 是所有配置信息的一站式参考点 yaml中也有
 
 
 _C = CN()
@@ -150,7 +150,7 @@ def update_config(cfg, args):
             cfg.DATA_DIR, cfg.TEST.MODEL_FILE
         )
 
-    cfg.freeze()
+    cfg.freeze()#在初始化设置之后通常freeze一下
 
 
 if __name__ == '__main__':
